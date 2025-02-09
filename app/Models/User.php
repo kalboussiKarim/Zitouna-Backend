@@ -48,12 +48,17 @@ class User extends Authenticatable
         ];
     }
 
-    // Roles
+    
     public const ROLE_ADMIN = 'admin';
     public const ROLE_CLIENT = 'client';
     public const ROLE_WORKER = 'worker';
 
-    // Methods
+
+    public function commands()
+    {
+        return $this->hasMany(Command::class);
+    }
+    
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;
@@ -67,12 +72,5 @@ class User extends Authenticatable
     public function isWorker(): bool
     {
         return $this->role === self::ROLE_WORKER;
-    }
-
-    // Relationships
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
     }
 }
